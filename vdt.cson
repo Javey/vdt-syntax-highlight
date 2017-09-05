@@ -1,0 +1,125 @@
+'name': 'Vdt Template'
+'scopeName': 'source.js.vdt'
+'fileTypes': [
+    'vdt'
+]
+'patterns': [
+    {
+        'include': '#jsx'
+    }
+    {
+        'match': '(?<!\\.)\\b(scope|parent|obj|self)(?!=\\w)'
+        'name': 'keyword.other.js'
+    }
+    {
+        'match': '(?<!\\.)\\b(h|hu|hc)(?!=\\w)'
+        'name': 'variable.other.js'
+    }
+    {
+        'include': 'source.js'
+    }
+]
+'repository':
+    'jsx':
+        'name': 'meta.jsx.js'
+        'patterns': [
+            {
+                'include': '#jsx-tag-open'
+            }
+            {
+                'include': '#jsx-tag-close'
+            }
+            {
+                'include': '#jsx-comment'
+            }
+        ]
+    'jsx-tag-open':
+        'begin': '(<)([a-zA-Z0-9\.:$_\-]+)'
+        'end': '(/?>)'
+        'name': 'tag.open.js'
+        'beginCaptures':
+            '1':
+                'name': 'punctuation.definition.tag.begin.js'
+            '2':
+                'name': 'entity.name.tag.js'
+        'endCaptures':
+            '1':
+                'name': 'punctuation.definition.tag.end.js'
+        'patterns': [
+            {
+                'include': '#jsx-tag-attributes'
+            }
+        ]
+    'jsx-tag-close':
+        'match': '(</)([^>]+)(>)'
+        'name': 'tag.closed.js'
+        'captures':
+            '1':
+                'name': 'punctuation.definition.tag.begin.js'
+            '2':
+                'name': 'entity.name.tag.js'
+            '3':
+                'name': 'punctuation.definition.tag.end.js'
+    'jsx-tag-attributes':
+        'patterns': [
+            {
+                'include': '#jsx-tag-attribute-name'
+            }
+            {
+                'include': '#jsx-string-double-quoted'
+            }
+            {
+                'include': '#jsx-string-single-quoted'
+            }
+            {
+                'include': '#jsx-expression'
+            }
+        ]
+    'jsx-tag-attribute-name':
+        'match': '\\b([a-zA-Z0-9\\-:_\.\$]+)'
+        'name': 'meta.tag.attribute-name.js'
+        'captures':
+            '1':
+                'name': 'entity.other.attribute-name.js'
+    'jsx-string-double-quoted':
+        'begin': '"'
+        'end': '"'
+        'name': 'string.quoted.double.js'
+        'beginCaptures':
+            '0':
+                'name': 'punctuation.definition.string.begin.js'
+        'endCaptures':
+            '0':
+                'name': 'punctuation.definition.string.end.js'
+    'jsx-string-single-quoted':
+        'begin': '\''
+        'end': '\''
+        'name': 'string.quoted.single.js'
+        'beginCaptures':
+            '0':
+                'name': 'punctuation.definition.string.begin.js'
+        'endCaptures':
+            '0':
+                'name': 'punctuation.definition.string.end.js'
+    'jsx-expression':
+        'begin': '{'
+        'end': '}'
+        'name': 'meta.brace.curly.js'
+        'beginCaptures':
+            '0':
+                'name': 'punctuation.definition.brace.curly.start.js'
+        'endCaptures':
+            '0':
+                'name': 'punctuation.definition.brace.curly.end.js'
+        'patterns': [
+            {
+                'include': '$self'
+            }
+        ]
+    'jsx-comment':
+        'begin': '<!--'
+        'end': '-->'
+        'name': 'comment.block.js'
+        'captures':
+            '0':
+                'name': 'punctuation.definition.comment.js'
